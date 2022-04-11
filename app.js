@@ -16,7 +16,6 @@ app.get('/', (req,res) => {
     res.send('test test 123')
 })
 
-process.env.
 
 mongoose.connect(process.env.CONNECTION_URL, () => console.log('connected to db'))
 

@@ -28,4 +28,6 @@ const connectDB = async () => {
     
 }
 
-app.listen(process.env.PORT || 5000, console.log('listening'))
+connectDB()
+
+app.listen(process.env.PORT || 3000, console.log('listening at ' + process.env.PORT))

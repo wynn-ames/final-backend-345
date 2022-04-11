@@ -2,6 +2,8 @@
 
 function registerUser(name, phone, email, password){
 
+    
+
 }
 
 function loginUser(email, password) {

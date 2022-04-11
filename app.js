@@ -16,6 +16,8 @@ app.get('/', (req,res) => {
     res.send('test test 123')
 })
 
+process.env.
+
 mongoose.connect(process.env.CONNECTION_URL, () => console.log('connected to db'))
 
-app.listen(3000, () => console.log('listening at 3000'))
+app.listen(process.env.PORT || 5000, console.log('listening'))

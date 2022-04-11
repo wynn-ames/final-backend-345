@@ -20,7 +20,7 @@ app.get('/', (req,res) => {
 const connectDB = async () => {
 
     try {
-      mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true})
+      await mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true})
       console.log('connected to mongodb!!!')
     } catch (err) {
         console.log('failed connect to mongodb')

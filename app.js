@@ -17,6 +17,6 @@ app.get('/', (req,res) => {
 })
 
 
-mongoose.connect(process.env.CONNECTION_URL, () => console.log('connected to db'))
+mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true}, () => console.log('connected to db'))
 
 app.listen(process.env.PORT || 5000, console.log('listening'))

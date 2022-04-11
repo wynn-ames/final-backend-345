@@ -17,6 +17,15 @@ app.get('/', (req,res) => {
 })
 
 
-mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true}, () => console.log('connected to db'))
+const connectDB = async () => {
+
+    try {
+      mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true})
+      console.log('connected to mongodb!!!')
+    } catch (err) {
+        console.log('failed connect to mongodb')
+    }
+    
+    
 
 app.listen(process.env.PORT || 5000, console.log('listening'))

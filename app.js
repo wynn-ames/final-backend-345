@@ -26,6 +26,6 @@ const connectDB = async () => {
         console.log('failed connect to mongodb')
     }
     
-    
+}
 
 app.listen(process.env.PORT || 5000, console.log('listening'))

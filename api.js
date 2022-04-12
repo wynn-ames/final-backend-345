@@ -23,6 +23,8 @@ function registerUser(name, phone, email, password){
 
 function loginUser(email, password) {
 
+    //hhuuuh
+
     const response = await fetch('https://cs-backend.herokuapp.com/login', {
         method: 'post',
         body: {

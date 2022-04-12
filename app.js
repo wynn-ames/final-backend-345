@@ -16,11 +16,6 @@ app.get('/', (req,res) => {
     res.send('test test 123')
 })
 
-<<<<<<< HEAD
-mongoose.connect(process.env.CONNECTION_URL, () => console.log('connected to db'))
-
-app.listen(3000, () => console.log('listening at 3000'))
-=======
 
 const connectDB = async () => {
 
@@ -36,4 +31,3 @@ const connectDB = async () => {
 connectDB()
 
 app.listen(process.env.PORT || 3000, console.log('listening at ' + process.env.PORT))
->>>>>>> ad0e6ec7abb30a3f6c428cda83879cd60a98e4dc

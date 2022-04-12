@@ -25,7 +25,10 @@
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.10",
+<<<<<<< HEAD
     "node-fetch": "^3.2.3",
+=======
+>>>>>>> ad0e6ec7abb30a3f6c428cda83879cd60a98e4dc
     "nodemon": "^2.0.15"
   }
 }

@@ -4,12 +4,12 @@ const app = express()
 const bodyParser = require('body-parser')
 require('dotenv/config')
 
-const registerRoute = require('./routes/register')
+const dataRoute = require('./routes/data')
 const loginRoute = require('./routes/login')
-const categoriesRoute = require('./routes/categories')
+const categoriesRoute = require('./routes/data')
 
 app.use(bodyParser.json())
-app.use('/register', registerRoute)
+app.use('/data', dataRoute)
 app.use('/login', loginRoute)
 app.use('/categories', categoriesRoute)
 app.get('/', (req,res) => {

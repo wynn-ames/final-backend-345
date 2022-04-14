@@ -6,6 +6,20 @@ const router = express.Router()
 
 router.get('/',verify, (req, res) => {
 
+    const data = Users.findByIdAndDelete (req.user._id, async (error, data) => {
+        if(error) {
+            console.log(error)
+        } else {
+            console.log(data)
+            res.send(data)
+        }
+    })
+
+    
+})
+
+router.delete('/',verify, (req, res) => {
+
     const data = Users.findById(req.user._id, async (error, data) => {
         if(error) {
             console.log(error)

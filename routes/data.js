@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get('/',verify, (req, res) => {
 
-    const data = Users.findByIdAndDelete (req.user._id, async (error, data) => {
+    const data = Users.findByIdAndDelete(req.user._id, async (error, data) => {
         if(error) {
             console.log(error)
         } else {

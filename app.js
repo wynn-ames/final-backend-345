@@ -6,12 +6,12 @@ require('dotenv/config')
 
 const dataRoute = require('./routes/data')
 const loginRoute = require('./routes/login')
-const categoriesRoute = require('./routes/data')
+const registerRoute = require('./routes/register')
 
 app.use(bodyParser.json())
 app.use('/data', dataRoute)
 app.use('/login', loginRoute)
-app.use('/categories', categoriesRoute)
+app.use('/register', registerRoute)
 app.get('/', (req,res) => {
     res.send('test test 123')
 })

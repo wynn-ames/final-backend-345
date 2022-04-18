@@ -15,9 +15,14 @@ router.get("/", verify, (req, res) => {
   });
 });
 
-router.get("/update", verify, async (req, res) => {
+router.patch("/", verify, async (req, res) => {
   let user = await Users.findById(req.user._id);
-  user.data = req.body.data;
+  console.log(req.body);
+  const { data, name, email, phone } = req.body;
+  user.data = data;
+  user.name = name;
+  user.email = email;
+  user.phone = phone;
   await user.save();
   res.send(user);
 });

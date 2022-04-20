@@ -1,19 +1,24 @@
 const bcrypt = require("bcryptjs");
 const express = require("express");
 const Users = require("../models/Users");
+const jwt = require("jsonwebtoken");
 
 const { registerValidation, loginValidation } = require("../validation");
 
 const router = express.Router();
 
+function respond(success, message, res = null) {
+  return { success, message, res };
+}
+
 router.post("/", async (req, res) => {
   //validate data
   const { error } = registerValidation(req.body);
-  if (error) return res.status(401).send(error);
+  if (error) return res.json(respond(false, "Feilds are invalid."));
 
   const emailExist = await Users.findOne({ email: req.body.email });
   if (emailExist) {
-    return res.status(200).send("email already exists");
+    return res.json(respond(false, "Email is already used."));
   }
 
   const salt = await bcrypt.genSalt(10);
@@ -28,9 +33,10 @@ router.post("/", async (req, res) => {
 
   try {
     const savedUser = await user.save();
-    res.json(savedUser);
+    const token = jwt.sign({ _id: savedUser._id }, process.env.TOKEN_SECRET);
+    res.json(respond(true, "New user registered.", { token }));
   } catch (err) {
-    res.status(500).send(err);
+    res.json(respond(false, "Unable to register."));
     console.log("what");
   }
 });

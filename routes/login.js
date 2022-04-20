@@ -1,46 +1,35 @@
-const bcrypt = require('bcryptjs');
-const express = require('express');
-const Users = require('../models/Users');
-const jwt = require('jsonwebtoken')
+const bcrypt = require("bcryptjs");
+const express = require("express");
+const Users = require("../models/Users");
+const jwt = require("jsonwebtoken");
 
+const { registerValidation, loginValidation } = require("../validation");
 
-const {registerValidation, loginValidation} = require('../validation')
+const router = express.Router();
 
-const router = express.Router()
+function respond(success, message, res = null) {
+  return { success, message, res };
+}
 
+router.post("/", async (req, res) => {
+  //validate data
+  const { error } = loginValidation(req.body);
+  if (error) return res.json(respond(false, "There was an error.", error));
 
-router.post('/', async (req, res) => { 
+  const usr = await Users.findOne({ email: req.body.email });
+  if (!usr) {
+    return res.json(respond(false, "Email or password is wrong."));
+  }
 
-    //validate data
-    const {error} = loginValidation(req.body)
-    if(error) return res.status(400).send(error)
+  const validPass = await bcrypt.compare(req.body.password, usr.password);
 
-    const usr = await Users.findOne({email: req.body.email})
-    if(!usr){
-        return res.status(400).send('email! or password is wrong')
-    }
+  if (!validPass) {
+    return res.json(respond(false, "Email or password is wrong."));
+  }
 
-    const validPass = await bcrypt.compare(req.body.password, usr.password)
+  const token = jwt.sign({ _id: usr._id }, process.env.TOKEN_SECRET);
 
-    if(!validPass) {
+  res.json(respond(true, "Logged In", { token }));
+});
 
-        return res.status(400).send('email or password! is wrong')
-        
-    }
-
-    const token = jwt.sign({_id: usr._id}, process.env.TOKEN_SECRET)
-    
-    res.header('auth-token', token).send(token)
-    
-    
-    
-    
-
-    
-
-    
-        
-    
-})
-
-module.exports = router
+module.exports = router;

@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
 
   const emailExist = await Users.findOne({ email: req.body.email });
   if (emailExist) {
-    return res.status(401).send("email already exists");
+    return res.status(200).send("email already exists");
   }
 
   const salt = await bcrypt.genSalt(10);

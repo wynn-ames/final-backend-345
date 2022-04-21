@@ -29,6 +29,7 @@ router.post("/", async (req, res) => {
     email: req.body.email,
     phone: req.body.phone,
     password: hashedPassword,
+    data: JSON.stringify({ budget: [], expenses: [] }),
   });
 
   try {
